@@ -39,7 +39,7 @@
                 </ul>
             </li>
 
-            <li class="menu" title="You can create/show post here">
+            <li class="menu" title="You can create/show product here">
                 <a href="#pro" data-toggle="collapse" data-active="" aria-expanded="" class="dropdown-toggle">
                     <div class="">
                         <span>Product</span>
@@ -50,12 +50,12 @@
                 </a>
                 <ul class="collapse submenu list-unstyled" id="pro" data-parent="#accordionExample">
                     <li>
-                        <a href="{{ route('post.index') }}"> Product List</a>
+                        <a href="{{ route('product.index') }}"> Product List</a>
                     </li>
                 </ul>
             </li>
 
-            <li class="menu" title="You can create/show post here">
+            <li class="menu" title="You can create/show coin here">
                 <a href="#coin" data-toggle="collapse" data-active="" aria-expanded="" class="dropdown-toggle">
                     <div class="">
                         <span>Coin</span>
@@ -71,6 +71,24 @@
 
                 </ul>
             </li>
+
+            <li class="menu" title="Show sold by coin here">
+                <a href="#sold" data-toggle="collapse" data-active="" aria-expanded="" class="dropdown-toggle">
+                    <div class="">
+                        <span>Sold by Coin</span>
+                    </div>
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+                </a>
+                <ul class="collapse submenu list-unstyled" id="sold" data-parent="#accordionExample">
+                    <li>
+                        <a href="{{ route('soldBy_index') }}"> Sold by Coin List</a>
+                    </li>
+
+                </ul>
+            </li>
+
             @else
 
                 <li class="menu" title="You can create/show post here">

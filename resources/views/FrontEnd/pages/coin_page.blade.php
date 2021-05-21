@@ -11,6 +11,18 @@
         <div class="row" id="cancel-row">
 
             <div class="col-lg-12 layout-spacing layout-top-spacing">
+
+                {{-- display error message --}}
+                @if(Session::has('error'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>{{ Session::get('error') }}</strong>.
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
+                {{-- //display error message --}}
+
                 <div class="statbox widget box box-shadow">
                     <div class="widget-header">
                         <div class="row">

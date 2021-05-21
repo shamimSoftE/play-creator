@@ -22,7 +22,7 @@
                 <div class="row">
                     <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                         <h5>Create Post</h5>
-                        <a class="float-right mb-3" href="{{ route('post.index') }}">
+                        <a class="float-right mb-3" href="{{ route('product.index') }}">
                             <i class="fas fa-list"></i> Post List
                         </a>
                     </div>
@@ -31,15 +31,15 @@
             {{--<div class="widget-content widget-content-area">--}}
             <div class="offset-1 col-xl-10 col-md-10 col-sm-10 col-10">
 
-                <form action="{{ route('post.store') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('product.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
-                    <div class="form-group">
+                    {{--<div class="form-group">
                         <label for="name">Post Title<sup style="color:red;" title="Must fill out this">*</sup></label>
                         <input type="text" class="form-control @error('title') is-invalid @enderror " value="{{ old('title') }}" name="title">
                         @error('title')
                         <div class="alert alert-default-danger">{{ $message }}</div>
                         @enderror
-                    </div>
+                    </div>--}}
 
                     <div class="row">
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
@@ -70,9 +70,9 @@
                     <div class="row">
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
-                                <label for="name">Post Price<sup style="color:red;" title="Must fill out this">*</sup></label>
-                                <input type="text" class="form-control @error('price') is-invalid @enderror" value="{{ old('price') }}" name="price">
-                                @error('price')
+                                <label for="name">Post Quantity<sup style="color:red;" title="Must fill out this">*</sup></label>
+                                <input type="text" class="form-control @error('quantity') is-invalid @enderror" value="{{ old('quantity') }}" name="quantity">
+                                @error('quantity')
                                 <div class="alert alert-default-danger">{{ $message }}</div>
                                 @enderror
                             </div>

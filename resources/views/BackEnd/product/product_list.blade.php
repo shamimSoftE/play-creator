@@ -1,7 +1,7 @@
 @extends('BackEnd.master')
 
 @section('title')
-    Post | List
+    Product | List
 @endsection
 
 @section('content')
@@ -22,8 +22,8 @@
                 {{-- //display error message --}}
                 <div class="widget-content widget-content-area br-6 p-2">
                     <div class="">
-                        <a class="float-right mt-2 mr-4" href="{{ route('post.create') }}">
-                           <i class="fas fa-plus-circle"></i> Post-Generate
+                        <a class="btn btn-sm float-right mt-3 mr-4" href="{{ route('product.create') }}">
+                           <i class="fas fa-plus-circle"></i> Product-Generate
                         </a>
                     </div>
 
@@ -32,8 +32,8 @@
                         <thead>
                         <tr>
                             <th>Sl</th>
-                            <th>Title</th>
-                            <th>Price</th>
+                            {{--<th>Title</th>--}}
+                            <th>Quantity</th>
                             <th>Point</th>
                             <th>Category</th>
                             <th>Section</th>
@@ -43,32 +43,32 @@
                         </thead>
                         <tbody>
                         @php($i = 1)
-                        @foreach($posts as $post)
+                        @foreach($products as $pro)
                             <tr>
                                 <td>{{ $i++ }}</td>
-                                <td>{{ $post->title }}</td>
+                                {{--<td>{{ $pro->title }}</td>--}}
 
-                                <td>{{ $post->price }}</td>
-                                <td>{{ $post->point }}</td>
+                                <td>{{ $pro->quantity }}</td>
+                                <td>{{ $pro->point }}</td>
 
                                 <td>
-                                    @isset($post->category->image)
-                                        <img src="{{ asset("Back/images/category/".$post->category->image) }}" height="80px" alt="cate-img">
+                                    @isset($pro->category->image)
+                                        <img src="{{ asset("Back/images/category/".$pro->category->image) }}" height="80px" alt="cate-img">
                                     @endisset
                                 </td>
                                 <td>
-                                    @isset($post->section->title)
-                                        {{ $post->section->title }}
+                                    @isset($pro->section->title)
+                                        {{ $pro->section->title }}
                                     @endisset
                                 </td>
 
                                 <td>
-                                    @if($post->status == 1)
-                                        <a class="btn text-success" href="{{ route('post_hide',$post->id) }}" title="Active">
+                                    @if($pro->status == 1)
+                                        <a class="btn text-success" href="{{ route('post_hide',$pro->id) }}" title="Active">
                                             <i class="fas fa-arrow-up"></i>
                                         </a>
                                     @else
-                                        <a class="btn text-primary" href="{{ route('post_active',$post->id) }}" title="Inactive">
+                                        <a class="btn text-primary" href="{{ route('post_active',$pro->id) }}" title="Inactive">
                                             <i class="fas fa-arrow-down"></i>
                                         </a>
                                     @endif
@@ -76,22 +76,22 @@
                                 <td>
                                     <a class="btn" onclick="event.preventDefault();
                                         if(confirm('Are you really want to delete?')){
-                                        document.getElementById('post-delete-{{ $post->id }}').submit()
+                                        document.getElementById('product-delete-{{ $pro->id }}').submit()
                                         }">
                                         <i class="fas fa-trash text-danger"></i>
-                                        <form method="post" action="{{ route('post.destroy',$post) }}" id="{{ 'post-delete-'.$post->id }}">
+                                        <form method="post" action="{{ route('product.destroy',$pro) }}" id="{{ 'product-delete-'.$pro->id }}">
                                             @csrf
                                             @method('DELETE')
                                         </form>
                                     </a>
 
-                                    <a class="btn" data-toggle="modal" data-target="#postEdit{{ $post->id }}">
+                                    <a class="btn" data-toggle="modal" data-target="#postEdit{{ $pro->id }}">
                                         <i class="fas fa-pencil-alt" title="Edit"></i>
                                     </a>
                                 </td>
                                 {{-- modal --}}
 
-                                <div class="modal fade" id="postEdit{{ $post->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal fade" id="postEdit{{ $pro->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -101,22 +101,23 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <form action="{{ route('post.update',$post) }}" method="post">
+                                                <form action="{{ route('product.update',$pro) }}" method="post">
                                                     @csrf
                                                     @method('PUT')
-                                                    <div class="form-group">
-                                                        <label for="name">Post Title</label>
-                                                        <input type="text" class="form-control" value="{{ $post->title }}" name="title">
-                                                    </div>
+                                                    {{--<div class="form-group">
+                                                        <label for="name">Product Title</label>
+                                                        <input type="text" class="form-control" value="{{ $pro->title }}" name="title">
+                                                    </div>--}}
+                                                    <input type="hidden" name="id" value="{{ $pro->id }}">
 
                                                     <div class="row">
                                                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                                             <div class="form-group">
-                                                                <label for="section_id">Post Category </label>
+                                                                <label for="section_id">Product Category </label>
                                                                 <select class="form-control select2" name="category_id" >
-                                                                    <option value="">Select</option>
+                                                                    {{--<option value="">Select</option>--}}
                                                                     @foreach($categories as $cate)
-                                                                        <option value="{{ $cate->id }}" @if($cate->id = $post->category_id) selected @endif>
+                                                                        <option value="{{ $cate->id }}" @if($cate->id == $pro->category_id) selected @endif>
                                                                             {{ $cate->name }}
                                                                         </option>
                                                                     @endforeach
@@ -126,8 +127,8 @@
 
                                                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                                             <div class="form-group">
-                                                                <label for="name">Post Point</label>
-                                                                <input type="text" class="form-control" value="{{ $post->point }}" name="point">
+                                                                <label for="name">Product Point</label>
+                                                                <input type="text" class="form-control" value="{{ $pro->point }}" name="point">
 
                                                             </div>
                                                         </div>
@@ -136,18 +137,19 @@
                                                     <div class="row">
                                                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                                             <div class="form-group">
-                                                                <label for="name">Post Price</label>
-                                                                <input type="text" class="form-control" value="{{ $post->price }}" name="price">
+                                                                <label for="name">Product Quantity</label>
+                                                                <input type="text" class="form-control" value="{{ $pro->quantity }}" name="quantity">
                                                             </div>
                                                         </div>
 
                                                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
                                                             <div class="form-group">
-                                                                <label for="section_id">Post Section</label>
+                                                                <label for="section_id">Product Section</label>
                                                                 <select class="form-control select2" name="section_id" >
-                                                                    <option value="">Select</option>
+                                                                    {{--<option value="">Select</option>--}}
                                                                     @foreach($section as $sec)
-                                                                        <option value="{{ $sec->id }}" @if($sec->id = $post->section_id) selected @endif>
+                                                                        <option value="{{ $sec->id }}" {{--@if--}}
+                                                                            {{ ($sec->id == $pro->section_id) ? 'selected' : ''}} {{--@endif--}}>
                                                                             {{ $sec->title }}
                                                                         </option>
                                                                     @endforeach
@@ -169,8 +171,8 @@
                         <tfoot>
                         <tr>
                             <th>Sl</th>
-                            <th>Title</th>
-                            <th>Price</th>
+                            {{--<th>Title</th>--}}
+                            <th>Quantity</th>
                             <th>Point</th>
                             <th>Category</th>
                             <th>Section</th>

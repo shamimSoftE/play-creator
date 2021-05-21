@@ -11,11 +11,13 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::latest()->get();
+        $admin = auth()->guard('admin')->user()->id;
+
+        $products = Post::where('admin_id', $admin)->latest()->get();
         $categories = Category::where('status',1)->get();
         $section = Section::where('status',1)->get();
 
-        return view('BackEnd.post.post_list',compact('posts', 'section', 'categories'));
+        return view('BackEnd.product.product_list',compact('products', 'section', 'categories'));
     }
 
     public function create()
@@ -23,7 +25,7 @@ class PostController extends Controller
         $categories = Category::where('status',1)->get();
         $section = Section::where('status',1)->get();
 
-        return view('BackEnd.post.post_add',compact('section', 'categories'));
+        return view('BackEnd.product.product_add',compact('section', 'categories'));
     }
 
     public function show()
@@ -33,16 +35,32 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        /*dd($request->all());*/
+        $admin = auth()->guard('admin')->user()->id;
 
-        Post::create($request->all());
+        Post::create([
+            'title' => $request->title,
+            'quantity' => $request->quantity,
+            'point' => $request->point,
+            'section_id' => $request->section_id,
+            'category_id' => $request->category_id,
+            'admin_id' => $admin
+        ]);
 
         return back()->with('sms', 'Post Created');
     }
 
-    public function update(Post $post,Request $request)
+    public function update(Request $request, $id)
     {
-        $post->update($request->all());
+        $post = Post::find($id);
+
+        $post->update([
+            'title' => $request->title,
+            'quantity' => $request->quantity,
+            'point' => $request->point,
+            'section_id' => $request->section_id,
+            'category_id' => $request->category_id,
+        ]);
+
         return back()->with('sms', 'Post Updated');
     }
 

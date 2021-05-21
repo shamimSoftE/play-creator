@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Admin;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,15 @@ class AdminController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
+
+//        dd($request->all());
+
+        $admin = new Admin();
+        $admin->name = $request->name;
+        $admin->email = $request->email;
+        $admin->password = bcrypt($request->password);
+        $admin->save();
+        return redirect()->route('admin_dashboard');
     }
 
     public function login()

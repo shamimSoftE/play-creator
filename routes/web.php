@@ -19,21 +19,49 @@ use App\Http\Controllers\CoinController;
 
 Route::get('/', [\App\Http\Controllers\FrontEnd::class, 'home']  )->name('guest_home');
 Route::get('coin-buy', [\App\Http\Controllers\FrontEnd::class, 'coinList'])->name('coin_list');
-//Route::get('process-to-checkout-{id}', [\App\Http\Controllers\FrontEnd::class, 'checkout'])->name('payment_page');
+Route::get('/search-item', [\App\Http\Controllers\FrontEnd::class, 'search'])->name('search_item');
+Route::get('category-product-{id}', [\App\Http\Controllers\FrontEnd::class, 'catePro'])->name('cate_pro');
 
+/*================= chatting ===================================== */
+Route::get('chat', [\App\Http\Controllers\ChattingController::class, 'create'])->name('chatting_form');
+Route::get('user-list', [\App\Http\Controllers\ChattingController::class, 'index'])->name('user_list');
+Route::get('chat-with-{id}', [\App\Http\Controllers\ChattingController::class, 'chatting'])->name('chat_user');
+Route::post('message-send', [\App\Http\Controllers\ChattingController::class, 'store'])->name('chatting_store');
+Route::get('message-replay', [\App\Http\Controllers\ChattingController::class, 'replay'])->name('chatting_replay');
+
+/*================= end chatting ===================================== */
+
+/*======================== buy coin & uc =======================================*/
 Route::get('checkout-{id}',[\App\Http\Controllers\CheckoutController::class, 'checkout'])->name('payment_page');
 Route::post('payment-success',[\App\Http\Controllers\CheckoutController::class, 'complete'])->name('payment_completed');
 
+Route::post('product-buy',[\App\Http\Controllers\CheckoutController::class, 'buyConfirm'])->name('buy_product');
+/*=========================== end buy coin & uc route ===============================*/
 Route::get('/dashboard', function () {
     return view('FrontEnd.home.home');
 })->middleware(['auth'])->name('dashboard');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/user-profile', [\App\Http\Controllers\FrontEnd::class, 'dashboard'])->name('user_profile');
+    Route::get('product-purchased', [\App\Http\Controllers\FrontEnd::class, 'purchasedProduct'])->name('purchased_product');
+    Route::get('coin-purchased', [\App\Http\Controllers\FrontEnd::class, 'purchasedCoin'])->name('purchased_coin');
+    Route::get('new-order', [\App\Http\Controllers\FrontEnd::class, 'OrderManage'])->name('user_order');
 
-    Route::get('/user-post', [\App\Http\Controllers\UserController::class, 'index'])->name('user_post');
-    Route::get('/user-post', [\App\Http\Controllers\UserController::class, 'create'])->name('user_post_create');
-    Route::post('/user-post-save', [\App\Http\Controllers\UserController::class, 'save'])->name('user_save');
+    /* ======================== seller ======================= */
+    Route::get('seller-request', [\App\Http\Controllers\SellerController::class, 'create'])->name('seller_form');
+    Route::post('seller-data', [\App\Http\Controllers\SellerController::class, 'store'])->name('seller_store');
+    /* ========================= seller ======================== */
+
+
+
+    Route::get('/user-product', [\App\Http\Controllers\UserController::class, 'index'])->name('user_post');
+    Route::get('/user-product', [\App\Http\Controllers\UserController::class, 'create'])->name('user_product_create');
+    Route::post('/user-product-save', [\App\Http\Controllers\UserController::class, 'store'])->name('user_save');
+    Route::post('/user-product-update-{id}', [\App\Http\Controllers\UserController::class, 'update'])->name('pro_update');
+
+    Route::get('/product-inactive-{id}', [\App\Http\Controllers\UserController::class, 'hide'])->name('product_hide');
+    Route::get('/product-active-{id}', [\App\Http\Controllers\UserController::class, 'active'])->name('product_active');
+    Route::post('/product-delete-{id}', [\App\Http\Controllers\UserController::class, 'destroy'])->name('product_destroy');
 });
 
 Route::prefix('admin')->group(function (){
@@ -55,6 +83,13 @@ Route::group(['middleware' => 'admin'], function () {
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin_dashboard');
     });
 
+    /*=============== seller ==============*/
+    Route::get('seller-list', [\App\Http\Controllers\SellerController::class, 'index'])->name('seller_list');
+    Route::get('seller-inactive-{id}', [\App\Http\Controllers\SellerController::class, 'Inactive'])->name('seller_hide');
+    Route::get('seller-active-{id}', [\App\Http\Controllers\SellerController::class, 'active'])->name('seller_active');
+    Route::post('seller-list-{id}', [\App\Http\Controllers\SellerController::class, 'destroy'])->name('seller_destroy');
+    /*=============== seller ==============*/
+
     /*=============== category ==============*/
 
     Route::resource('category', CategoryController::class );
@@ -71,16 +106,21 @@ Route::group(['middleware' => 'admin'], function () {
 
     /*================  Post ================ */
 
-    Route::resource('post', \App\Http\Controllers\PostController::class);
+    Route::resource('product', \App\Http\Controllers\PostController::class);
     Route::get('/active/{id}', [\App\Http\Controllers\PostController::class, 'active'] )->name('post_active');
     Route::get('/inactive/{id}', [\App\Http\Controllers\PostController::class, 'hide'])->name('post_hide');
-    /*================ end post ================ */
+    /*================ end product ================ */
 
     /*================  coin ================ */
     Route::resource('coin', CoinController::class);
     Route::get('coin-show-{id}',[CoinController::class, 'active'])->name('coin-active');
     Route::get('coin-hide-{id}',[CoinController::class, 'hide'])->name('coin_inactive');
     /*================ end coin ================ */
+
+    /*================ sold by coin ================ */
+    Route::get('/sold-by-coin', [ \App\Http\Controllers\BuyCoinController::class, 'index'])->name('soldBy_index');
+    Route::post('/sell-coin-delete-{id}', [ \App\Http\Controllers\BuyCoinController::class, 'trash'])->name('coin_sold_destroy');
+    /*================ end sold by coin ================ */
 
 
 });

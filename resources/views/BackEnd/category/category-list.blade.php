@@ -21,8 +21,8 @@
                 {{-- //display error message --}}
                 <div class="widget-content widget-content-area br-6 p-2">
                     <div class="">
-                        <a class="float-right mt-2 mr-4" href="{{ route('category.create') }}">
-                            Category Add
+                        <a class="btn btn-sm float-right mr-4 mt-3" href="{{ route('category.create') }}">
+                            <i class="fas fa-plus-circle"></i>Category Add
                         </a>
                     </div>
                     <table id="zero-config" class="table dt-table-hover" style="width:100%">

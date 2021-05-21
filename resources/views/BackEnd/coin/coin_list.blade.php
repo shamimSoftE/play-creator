@@ -21,8 +21,8 @@
                 {{-- //display error message --}}
                 <div class="widget-content widget-content-area br-6 p-2">
                     <div class="">
-                        <a class="float-right mt-2 mr-4" href="{{ route('coin.create') }}">
-                            Coin Add
+                        <a class="btn btn-sm float-right mr-4 mt-4" href="{{ route('coin.create') }}">
+                            <i class="fas fa-plus-circle"></i>Coin Add
                         </a>
                     </div>
                     <table id="zero-config" class="table dt-table-hover" style="width:100%">
@@ -84,9 +84,9 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <form action="{{ route('coin.store') }}" method="post">
+                                                <form action="{{ route('coin.update',$coin) }}" method="post">
                                                     @csrf
-                                                    @method('POST')
+                                                    @method('PUT')
                                                     <div class="form-group mb-3">
                                                         <label>Coin Amount</label>
                                                         <input type="text" class="form-control" name="coin_amount" value="{{ $coin->coin_amount }}" >

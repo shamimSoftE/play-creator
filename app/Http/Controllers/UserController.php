@@ -15,7 +15,7 @@ class UserController extends Controller
         $categories = Category::where('status',1)->get();
         $section = Section::where('status',1)->get();
 
-        return view('FrontEnd.post.post_list',compact('posts', 'section', 'categories'));
+        return view('FrontEnd.product.post_list',compact('posts', 'section', 'categories'));
     }
 
     public function create()
@@ -23,16 +23,21 @@ class UserController extends Controller
         $categories = Category::where('status',1)->get();
         $section = Section::where('status',1)->get();
 
-        return view('FrontEnd.post.post_add',compact('section', 'categories'));
+        return view('FrontEnd.product.user_post_add',compact('section', 'categories'));
     }
 
     public function store(Request $request)
     {
+        $request->validate([
+            'point' => 'required',
+            'quantity' => 'required',
+            'category_id' => 'required',
+        ]);
 
         Post::create([
             'title' => $request->title,
             'point' => $request->point,
-            'price' => $request->price,
+            'quantity' => $request->quantity,
             'section_id' => $request->section_id,
             'category_id' => $request->category_id,
             'user_id' => auth()->user()->id,
@@ -41,16 +46,45 @@ class UserController extends Controller
         return back()->with('sms', 'Post Created');
     }
 
-    public function update(Post $post,Request $request)
+    public function update(Request $request,$id)
     {
+        $post = Post::find($id);
+
+        /*dd($product);*/
         $post->update([
-            'title' => $request->input('title', $post->title),
-            'point' => $request->input('point', $post->point),
-            'price' => $request->input('price', $post->price),
-            'section_id' => $request->input('section_id', $post->section_id),
-            'category_id' => $request->input('category_id', $post->category_id),
+            'title' => $request->title,
+            'point' => $request->point,
+            'quantity' => $request->quantity,
+            'section_id' => $request->section_id,
+            'category_id' => $request->category_id,
             'user_id' => auth()->user()->id,
         ]);
         return back()->with('sms', 'Post Updated');
+    }
+
+    public function active($id)
+    {
+        $product = Post::find($id);
+
+        $product->status = 1;
+        $product->save();
+        return back();
+    }
+
+    public function hide($id)
+    {
+        $product = Post::find($id);
+
+        $product->status = 0;
+        $product->save();
+        return back();
+    }
+
+    public function destroy($id)
+    {
+        $product = Post::find($id);
+
+        $product->delete();
+        return back()->with('sms', 'Product Deleted');
     }
 }

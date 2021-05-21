@@ -9,265 +9,177 @@
 
         <div class="row layout-top-spacing">
 
-                <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
-                    <div class="widget widget-table-two">
 
-                        @php
-                            $coins = \App\Models\Coin::all();
-                        @endphp
-                        <div class="widget-heading">
-                            <h5 class="">Total Coin {{ $coins->count()  }}</h5>
-                            <h5 class="text-center">New Coin</h5>
-                        </div>
-                        <div class="widget-content">
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 layout-spacing">
+                <div class="widget widget-table-two">
+
+                    @php
+                        $seller = \App\Models\Seller::latest()->get();
+                    @endphp
+
+                    <div class="widget-heading form-inline">
+                        <h5 class="text-primary">
+                            New seller
+                            <sup style="font-size: 20px;color: #9100ff">{{ $seller->count()  }}</sup>
+                        </h5>
+                        <a href="{{ route('seller_list') }}" class="btn btn-sm btn-success ml-2" title="Show List">View</a>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 layout-spacing">
+                <div class="widget widget-table-two">
+
+                    @php
+                        $SoldByCoin = \App\Models\BuyCoin::latest()->get();
+                    @endphp
+
+                    <div class="widget-heading form-inline">
+                        <h5 class="text-primary">
+                            New sell coins
+                            <sup style="font-size: 20px;color: #9100ff">{{ $SoldByCoin->count()  }}</sup>
+                        </h5>
+                        <a href="{{ route('soldBy_index') }}" class="btn btn-sm btn-primary mt-2" title="Show List">View</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 layout-spacing">
+                <div class="widget widget-table-two">
+                    @php
+                        $cates = \App\Models\Category::where('status',1)->get();
+                    @endphp
+                    <div class="widget-heading form-inline">
+                        <h5 class="text-success">
+                            Total Category
+                            <sup style="font-size: 20px;color: #02009a">{{ $cates->count()  }}</sup>
+                        </h5>
+                        <a href="{{ route('category.index') }}" class="btn btn-sm btn-dark mt-2" title="Show List">View</a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tableHover" class="col-lg-12 col-12 layout-spacing">
+
+            </div>
+
+            <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+
+                <div class="widget widget-table-two">
+                    @php
+                        $user = \App\Models\User::all();
+                    @endphp
+                    <div class="widget-heading">
+                        <h5 class="" style="color: #422b02">Total Users <sup style="font-size: 20px;color: #085a01">{{ $user->count()  }}</sup></h5>
+                        <h5 class="text-center">Users List</h5>
+                    </div>
+
+                    <div class="widget-content">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
                                     <tr>
-                                        <th><div class="th-content">Coin Amount</div></th>
-                                        <th><div class="th-content">Coin Price</div></th>
-                                        <th><div class="th-content">Status</div></th>
+                                        <th>
+                                            <div class="th-content">Name</div>
+                                        </th>
+                                        <th>
+                                            <div class="th-content">E-mail</div>
+                                        </th>
+                                        <th>
+                                            <div class="th-content">Register Date</div>
+                                        </th>
                                     </tr>
-                                    </thead>
-                                    @php
-                                        $coinNew = \App\Models\Coin::latest()->take(5)->get();
-                                    @endphp
-                                    <tbody>
-                                    @forelse($coinNew as $coin)
+                                </thead>
+                                @php
+                                    $users = \App\Models\User::latest()->take(5)->get();
+                                @endphp
+                                <tbody>
+                                @forelse($users as $user)
                                     <tr>
                                         <td>
-                                            <div class="td-content product-brand text-primary">{{ $coin->coin_amount }}</div>
+                                            <div class="td-content">{{ $user->name }}</div>
                                         </td>
 
-                                        <td><div class="td-content pricing"><span class="">${{$coin->coin_price}}</span></div></td>
+                                        <td><div class="td-content"><span class="">{{ $user->email }}</span></div></td>
+
                                         <td>
                                             <div class="td-content">
-                                                @if($coin->status == 1)
-                                                    <span class="badge badge-success">
-                                                        Active
-                                                    </span>
-                                                @else
-                                                    <span class="badge badge-danger">
-                                                        Inactive
-                                                    </span>
-                                                @endif
+                                                <span class="badge badge-success">{{ $user->created_at->diffForHumans()  }}</span>
                                             </div>
                                         </td>
                                     </tr>
-                                    @empty
+                                @empty
+                                    <tr>
+                                        <td>
+                                            <span class="text-center">No Data Found</span>
+                                        </td>
+                                    </tr>
+                                @endforelse
 
-                                    @endforelse
-
-                                    </tbody>
-                                </table>
-                            </div>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-                {{-- end post--}}
-                <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
-                    <div class="widget widget-table-two">
-                        @php
-                            $cates = \App\Models\Category::all();
-                        @endphp
-                        <div class="widget-heading">
-                            <h5 class="">
-                                Total Categories
-                                @isset($cates)
-                                    {{ $cates->count()  }}
-                                @endisset
-                            </h5>
-                            <h5 class="text-center">
-                                Latest Category
-                            </h5>
-                        </div>
+            </div>
 
-                        <div class="widget-content">
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                    <tr>
-                                        <th><div class="th-content">SL</div></th>
-                                        <th><div class="th-content">Category Image</div></th>
-                                        <th><div class="th-content">Status</div></th>
-                                    </tr>
-                                    </thead>
-                                    @php
-                                        $cateRecent = \App\Models\Category::latest()->take(5)->get();
-                                    @endphp
-                                    <tbody>
-                                    @forelse($cateRecent as $cate)
-                                        <tr>
-                                            <td>
-                                                <div class="td-content product-brand text-primary">
-                                                    {{ $cate->id }}
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="td-content product-brand text-primary">
-                                                    <img  src="{{ asset("Back/images/category/".$cate->image ) }}" width="90px" alt="avatar">
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="td-content">
-                                                    @if( $cate->status == 1 )
-                                                        <span class="badge badge-success">Active</span>
-                                                    @else
-                                                        <span class="badge badge-danger">Inactive</span>
-                                                    @endif
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    @empty
-                                        <tr>
-                                            <td>
-                                                <div class="td-content product-brand text-primary">No Category Found</div>
-                                            </td>
-                                        </tr>
-                                    @endforelse
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+            <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                <div class="widget widget-table-two">
+                    @php
+                        $coins = \App\Models\Coin::all();
+                    @endphp
+                    <div class="widget-heading">
+                        <h5 style="color: #c69a31">Total Coin <sup style="font-size: 20px;color: #294729">{{ $coins->count()  }}</sup></h5>
+                        <h5 class="text-center">Coin List</h5>
                     </div>
-                </div>
-                {{--end category--}}
-
-                {{--<div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
-                    <div class="widget widget-table-three">
-                        @php
-                            $users = \App\Models\User::all();
-                        @endphp
-                        <div class="widget-heading">
-                            <h5 class="">Total  Users {{ $users->count()  }}</h5>
-                        </div>
-                        <h5 class="text-center">Recent User's </h5>
-
-                        <div class="widget-content">
-                            <div class="table-responsive">
-                                <table class="table table-scroll">
-                                    <thead>
+                    <div class="widget-content">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
                                     <tr>
-                                        <th><div class="th-content">ID</div></th>
-                                        <th><div class="th-content th-heading">Name</div></th>
-                                        <th><div class="th-content th-heading">E-mail</div></th>
-                                        <th><div class="th-content">Date</div></th>
-                                        <th><div class="th-content">View</div></th>
+                                        <th><div class="th-content">Coin Amount</div></th>
+                                        <th><div class="th-content">Coin Price</div></th>
+                                        <th>
+                                            <div class="th-content">Status</div>
+                                        </th>
                                     </tr>
-                                    </thead>
-                                    @php
-                                        $userRecent = \App\Models\User::latest()->take(5)->get();
-                                    @endphp
-                                    <tbody>
+                                </thead>
+                                @php
+                                    $coinNew = \App\Models\Coin::latest()->take(5)->get();
+                                @endphp
+                                <tbody>
+                                @forelse($coinNew as $coin)
+                                <tr>
+                                    <td>
+                                        <div class="td-content">{{ $coin->coin_amount }}</div>
+                                    </td>
 
-                                        @forelse($userRecent as $user)
-                                            <tr>
-                                               <td><div class="td-content"><span class="pricing">{{ $user->id }}</span></div></td>
-                                                <td><div class="td-content"><span class="discount-pricing">{{ $user->name }}</span></div></td>
-                                                <td><div class="td-content">{{ $user->email }}</div></td>
-                                                <td>
-                                                    <div class="td-content">
-                                                        --}}{{--{{ $user->created_at->diffForHumans() }}--}}{{--
-                                                        {{ $user->created_at->format('d M Y')  }}
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="td-content">
-                                                        <a href="{{ route('users_list') }}" class="text-primary ml-2"> See</a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        @empty
-
-                                        @endforelse
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>--}}
-                {{-- end user --}}
-
-                {{--<div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
-                    <div class="widget widget-table-three">
-                        @php
-                            $categories = \App\Models\Category::all();
-                        @endphp
-                        <div class="widget-heading">
-                            <h5 class="">Total Sub-Categories {{ $categories->count()  }}</h5>
-                            <h5 class="text-center">New Sub-Categories</h5>
-                        </div>
-
-                        <div class="widget-content">
-                            <div class="table-responsive">
-                                <table class="table table-scroll">
-                                    <thead>
-                                        <tr>
-                                            <th><div class="th-content">Category</div></th>
-                                            <th><div class="th-content th-heading">Parent</div></th>
-                                            <th><div class="th-content th-heading">Sub-Category</div></th>
-                                            <th><div class="th-content">Status</div></th>
-                                        </tr>
-                                    </thead>
-                                    @php
-                                        $subCate = \App\Models\Category::latest()->with(['category','parent'])->latest()->take(5)->get();
-                                    @endphp
-                                    <tbody>
-                                    @forelse($subCate as $sub)
-                                        <tr>
-                                           <td>
-                                               <div class="td-content">
-                                                   <span class="pricing">
-                                                       @isset($sub->category->name)
-                                                       {{ $sub->category->name }}
-                                                       @endisset
-                                                   </span>
-                                               </div>
-                                           </td>
-
-                                            @if(isset($sub->parent->name))
-                                                <td>
-                                                    <div class="td-content">
-                                                        <span class="discount-pricing">
-                                                            {{ $sub->parent->name }}
-                                                        </span>
-                                                    </div>
-                                                </td>
+                                    <td><div class="td-content"><span class="">${{$coin->coin_price}}</span></div></td>
+                                    <td>
+                                        <div class="td-content">
+                                            @if($coin->status == 1)
+                                                <span class="badge badge-primary">
+                                                    Active
+                                                </span>
                                             @else
-                                                <td>
-                                                    <div class="td-content">
-                                                        <span class="discount-pricing">
-                                                           Root
-                                                        </span>
-                                                    </div>
-                                                </td>
+                                                <span class="badge badge-danger">
+                                                    Inactive
+                                                </span>
                                             @endif
-                                            <td><div class="td-content">{{ $sub->name  }}</div></td>
-                                            <td>
-                                                <div class="td-content">
-                                                    @if($sub->status = 1)
-                                                        <a href="" class="text-success">Active</a>
-                                                    @else
-                                                        <a href="" class="text-danger">Inactive</a>
-                                                    @endif
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        @empty
+                                        </div>
+                                    </td>
+                                </tr>
+                                @empty
 
-                                        @endforelse
-                                    </tbody>
-                                </table>
+                                @endforelse
 
-                            </div>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                </div>--}}
-                {{-- end sub-category --}}
-           {{-- @else
-
-            @endif--}}
-
+                </div>
+            </div>
 
         </div>
 

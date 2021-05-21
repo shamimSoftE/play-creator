@@ -38,6 +38,7 @@
                                                 <form action="{{route('payment_completed')}}"  method="post" id="payment-form">
                                                     @csrf
                                                     <div class="form-group">
+                                                        <input type="hidden" name="id" value="{{ $coin->id}}">
                                                         <div class="card-header">
                                                             <label for="card-element">
                                                                 Enter your credit card information

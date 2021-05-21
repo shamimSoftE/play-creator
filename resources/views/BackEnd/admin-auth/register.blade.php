@@ -15,7 +15,7 @@
 
                         <h1 class="">Register</h1>
                         <p class="signup-link register">Already have an account? <a href="{{ route('login') }}">Log in</a></p>
-                        <form method="POST" action="{{ route('register') }}" class="text-left">
+                        <form method="POST" action="{{ route('admin_store') }}" class="text-left">
                             @csrf
 
                             <div class="form">
