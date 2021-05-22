@@ -84,7 +84,7 @@ class CheckoutController extends Controller
 
                 Mail::send('FrontEnd.pages.new_order_mail',compact('data'), function ($message) use($data) {
                     $message->to($data['email']);
-                    $message->subject('Order');
+                    $message->subject('order');
                 });
 
             }else
@@ -101,7 +101,7 @@ class CheckoutController extends Controller
 
                 Mail::send('FrontEnd.pages.new_order_mail',compact('dataTwo'), function ($message) use($dataTwo) {
                     $message->to($dataTwo['email']);
-                    $message->subject('New Order');
+                    $message->subject('New order');
                 });
             }
 

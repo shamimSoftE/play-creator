@@ -44,18 +44,9 @@
                                                 {{--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>--}}
                                             </div>
                                             <div class="card-body">
-                                                {{--<ul class="list-group list-group-minimal mb-3">
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">Support forum
-                                                    </li>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">Free hosting
-                                                    </li>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">2 hours of support
-                                                    </li>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">5GB of storage space
-                                                    </li>
-                                                </ul>--}}
+
                                                 @auth
-                                                <a href="{{ route('payment_page',$coin->id) }}" class="btn btn-block btn-primary">Get Coins</a>
+                                                    <a href="{{ route('payment_page',$coin->id) }}" class="btn btn-block btn-primary">Get Coins</a>
                                                 @else
                                                     <a href="{{ route('login') }}" title="Please Login/Register First" class="btn btn-block btn-primary">Get Coins</a>
                                                 @endauth

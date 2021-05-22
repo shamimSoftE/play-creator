@@ -10,32 +10,49 @@
         <div class="row layout-top-spacing">
 
 
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 layout-spacing">
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 layout-spacing">
+                <div class="widget widget-table-two">
+
+                    @php
+                        $orderByBank = \App\Models\BankTransfer::where('status',0)->latest()->get();
+                    @endphp
+
+                    <div class="widget-heading ">
+                        <h5 class="text-primary">
+                            Order By Bank
+                            <sup style="font-size: 20px;color: #9100ff">{{ $orderByBank->count()  }}</sup>
+                        </h5>
+                        <a href="{{ route('order_list') }}" class="btn btn-sm btn-info ml-1" title="Show List">View</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 layout-spacing">
                 <div class="widget widget-table-two">
 
                     @php
                         $seller = \App\Models\Seller::latest()->get();
                     @endphp
 
-                    <div class="widget-heading form-inline">
+                    <div class="widget-heading ">
                         <h5 class="text-primary">
                             New seller
                             <sup style="font-size: 20px;color: #9100ff">{{ $seller->count()  }}</sup>
                         </h5>
-                        <a href="{{ route('seller_list') }}" class="btn btn-sm btn-success ml-2" title="Show List">View</a>
+                        <a href="{{ route('seller_list') }}" class="btn btn-sm btn-success ml-1" title="Show List">View</a>
                     </div>
                 </div>
             </div>
 
 
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 layout-spacing">
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 layout-spacing">
                 <div class="widget widget-table-two">
 
                     @php
                         $SoldByCoin = \App\Models\BuyCoin::latest()->get();
                     @endphp
 
-                    <div class="widget-heading form-inline">
+                    <div class="widget-heading ">
                         <h5 class="text-primary">
                             New sell coins
                             <sup style="font-size: 20px;color: #9100ff">{{ $SoldByCoin->count()  }}</sup>
@@ -45,12 +62,12 @@
                 </div>
             </div>
 
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 layout-spacing">
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 layout-spacing">
                 <div class="widget widget-table-two">
                     @php
                         $cates = \App\Models\Category::where('status',1)->get();
                     @endphp
-                    <div class="widget-heading form-inline">
+                    <div class="widget-heading ">
                         <h5 class="text-success">
                             Total Category
                             <sup style="font-size: 20px;color: #02009a">{{ $cates->count()  }}</sup>

@@ -157,7 +157,7 @@
 
 /*
     ====================
-        Order Summary
+        order Summary
     ====================
 */
 
@@ -396,7 +396,7 @@
     display: inline-block;
     font-size: 14px;
     font-weight: 600;
-    letter-spacing: 1px;   
+    letter-spacing: 1px;
 }
 .widget-table-one .transactions-list .t-item .t-icon .avatar .avatar-title {
     background-color: #fff5f5;
@@ -513,12 +513,12 @@
     position: relative;
     height: 326px;
     overflow: auto;
-    padding-right: 12px;    
+    padding-right: 12px;
 }
 .widget-activity-four .widget-content {
     padding: 0 8px 0 20px;
 }
-.widget-activity-four .timeline-line .item-timeline { 
+.widget-activity-four .timeline-line .item-timeline {
     display: flex;
     width: 100%;
     padding: 8px 0;
@@ -537,7 +537,7 @@
     height: 6px;
     top: 7px;
     left: 5px;
-    transform: translateX(-50%); 
+    transform: translateX(-50%);
     border-color: #e0e6ed;
     background: #bfc9d4;
     z-index: 1;
@@ -580,7 +580,7 @@
 }
 .widget-activity-four .timeline-line .item-timeline.timeline-secondary .t-dot:before {
     background: #f3effc;
-    border: 2px solid rgb(92 26 195 / 35%);    
+    border: 2px solid rgb(92 26 195 / 35%);
 }
 .widget-activity-four .timeline-line .item-timeline.timeline-warning .t-dot:before {
     background-color: #fff9ed;
@@ -671,7 +671,7 @@
     min-width: 80px;
     max-width: 80px;
     font-size: 13px;
-    font-weight: 600; 
+    font-weight: 600;
     color: #e3e4eb;
     letter-spacing: 1px;
 }
@@ -800,7 +800,7 @@
     background-image: linear-gradient(315deg, #6b0f1a 0%, #4361ee 74%);
     min-height: 213px;
     height: 100%;
-    
+
 }
 .widget-account-invoice-three .widget-heading .wallet-usr-info {
     display: flex;
@@ -1310,7 +1310,7 @@
         ===========================
     */
 
-    
+
 
     .widget-account-invoice-three .widget-heading {
         padding: 24px 15px 63px 15px;
@@ -1325,7 +1325,7 @@
     .widget-account-invoice-three .invoice-list .inv-action a {
         font-size: 12px;
         padding: 5px 6px;
-    }    
+    }
 }
 @media(max-width: 575px) {
 
@@ -1353,7 +1353,7 @@
 
     /*
         ===========================
-                Wallet 
+                Wallet
         ===========================
     */
 

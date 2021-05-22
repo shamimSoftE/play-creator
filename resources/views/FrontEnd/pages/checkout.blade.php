@@ -30,9 +30,9 @@
                                 @endphp
                                 <div class="container" style="margin-top:10%;margin-bottom:10%">
                                     <div class="row justify-content-center">
-                                        <div class="col-md-12">
+                                        <div class="offset-1 col-lg-10 col-md-10 col-sm-12">
                                             <div class="">
-                                                <p>You will be charged $ {{ $coin->coin_price }}</p>
+                                                <p>You will be charged ${{ $coin->coin_price }}</p>
                                             </div>
                                             <div class="card">
                                                 <form action="{{route('payment_completed')}}"  method="post" id="payment-form">
@@ -64,10 +64,37 @@
                                                 </form>
                                             </div>
                                         </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="offset-1 col-lg-10 col-md-10 col-sm-12">
+                                <div class="">
+                                    <strong>Or</strong>
+                                    <p>You can pay with your bank account</p>
+                                </div>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <form action="{{route('pay_with_bank')}}"  method="post" enctype="multipart/form-data">
+                                            @csrf
+                                            <div class="form-group">
+
+                                                <div class="card-header">
+                                                    <label for="card-element">Give us your bank money transfer check image</label>
+
+                                                    <input type="hidden"  name="amount" value="{{ $coin->coin_price }}" />
+                                                    <input type="hidden" name="coin_id" value="{{ $coin->id}}">
+                                                    <input type="file" accept="image/*"  name="screenshot" class="form-control-file" />
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-dark float-right" type="submit">
+                                                Proceed
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
 
-                            </div>
+
                         </div>
                     </div>
                 </div>

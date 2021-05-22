@@ -34,6 +34,9 @@ Route::get('message-replay', [\App\Http\Controllers\ChattingController::class, '
 /*======================== buy coin & uc =======================================*/
 Route::get('checkout-{id}',[\App\Http\Controllers\CheckoutController::class, 'checkout'])->name('payment_page');
 Route::post('payment-success',[\App\Http\Controllers\CheckoutController::class, 'complete'])->name('payment_completed');
+            /*===================== pay with bank transfer */
+Route::post('pay-with-bank-',[\App\Http\Controllers\BankTransferController::class, 'bank'])->name('pay_with_bank');
+
 
 Route::post('product-buy',[\App\Http\Controllers\CheckoutController::class, 'buyConfirm'])->name('buy_product');
 /*=========================== end buy coin & uc route ===============================*/
@@ -121,6 +124,11 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/sold-by-coin', [ \App\Http\Controllers\BuyCoinController::class, 'index'])->name('soldBy_index');
     Route::post('/sell-coin-delete-{id}', [ \App\Http\Controllers\BuyCoinController::class, 'trash'])->name('coin_sold_destroy');
     /*================ end sold by coin ================ */
+
+    /*================ pay with bank ================ */
+    Route::get('/order-list', [\App\Http\Controllers\BankTransferController::class, 'list'])->name('order_list');
+    Route::get('/order-confirm-{id}', [\App\Http\Controllers\BankTransferController::class, 'confirm'])->name('order_confirm');
+    /*================ end pay with bank ================ */
 
 
 });
