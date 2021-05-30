@@ -18,7 +18,10 @@
 
         <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
         <link href="{{ asset('/Back') }}/assets/css/dashboard/dash_1.css" rel="stylesheet" type="text/css" />
-        <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+
+        <link href="{{ asset('/Back') }}/assets/css/apps/mailing-chat.css" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('/Back') }}/assets/css/scrollspyNav.css" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('/Back') }}/assets/css/components/cards/card.css" rel="stylesheet" type="text/css" />
 
         <!-- BEGIN PAGE LEVEL CUSTOM STYLES -->
 
@@ -142,6 +145,9 @@
     <script src="{{ asset('/Back') }}/assets/js/custom.js"></script>
 
     <!-- END GLOBAL MANDATORY SCRIPTS -->
+    <script src="{{ asset('/Back') }}/plugins/highlight/highlight.pack.js"></script>
+
+    <script src="{{ asset('/Back') }}/assets/js/scrollspyNav.js"></script>
 
     <!-- BEGIN PAGE LEVEL SCRIPTS -->
     <script src="{{ asset('/Back') }}/plugins/table/datatable/datatables.js"></script>

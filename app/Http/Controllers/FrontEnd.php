@@ -20,9 +20,10 @@ class FrontEnd extends Controller
     public function search()
     {
         $searchItem = \request()->query('query');
-        $searchCate = Category::where('name', 'LIKE', "%{$searchItem}%")->get();
-
-        return view('FrontEnd.pages.searchItem',compact('searchCate'));
+//        $searchCate = Category::where('name', 'LIKE', "%{$searchItem}%")->get();
+        $searchCate = Post::where('category_id', 'LIKE', "%{$searchItem}%")->get();
+        /*dd($searchCate);*/
+        return view('FrontEnd.pages.cate_wise_pro',compact('searchCate'));
     }
 
     public function catePro($id)

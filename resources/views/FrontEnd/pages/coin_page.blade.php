@@ -1,7 +1,7 @@
 @extends('FrontEnd.master')
 
 @section('title')
-    coin
+    coin page
 @endsection
 
 @section('content')
@@ -36,15 +36,14 @@
 
                             <div id="pricingWrapper" class="row">
                                 @forelse($coins as $coin)
-                                    <div class="col-md-6 col-lg-4">
-                                        <div class="card stacked mt-5">
+                                    <div class="col-md-6 col-lg-4 mt-5">
+                                        <div class="card stacked">
                                             <div class="card-header pt-0">
-                                                <span class="card-price">${{ $coin->coin_price }}</span>
-                                                <h3 class="card-title mt-3 mb-1 text-center">{{ $coin->coin_amount }} Coins</h3>
+                                                <h4 class="card-price">${{ $coin->coin_price }}</h4>
+                                                <h5 class="card-title mt-3 mb-1 text-center">{{ $coin->coin_amount }} Coins</h5>
                                                 {{--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>--}}
                                             </div>
                                             <div class="card-body">
-
                                                 @auth
                                                     <a href="{{ route('payment_page',$coin->id) }}" class="btn btn-block btn-primary">Get Coins</a>
                                                 @else

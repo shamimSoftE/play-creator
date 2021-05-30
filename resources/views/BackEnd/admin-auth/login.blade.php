@@ -69,7 +69,7 @@
                                     </a>
                                 </div>--}}
 
-                                <p class="signup-link">Not registered ? <a href="{{ route('admin_register') }}">Create an account</a></p>
+                                {{--<p class="signup-link">Not registered ? <a href="{{ route('admin_register') }}">Create an account</a></p>--}}
 
                             </div>
                         </form>

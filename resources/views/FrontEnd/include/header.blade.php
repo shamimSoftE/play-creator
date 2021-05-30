@@ -14,14 +14,32 @@
 
         <ul class="navbar-item flex-row ml-md-0 ml-auto">
             <li class="nav-item align-self-center search-animated">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search toggle-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+
+                @php
+                  $category = \App\Models\Category::where('status',1)->get();
+
+                @endphp
                 <form class="form-inline search-full form-inline search" method="GET" action="{{ route('search_item') }}" role="search">
-                    <div class="search-bar">
-                        <input type="search" name="query" class="form-control search-form-control  ml-lg-auto" placeholder="Search...">
+                    <div class="input-group search-form-control  ml-lg-auto">
+                        <select type="search" name="query" class="custom-select" id="inputGroupSelect04">
+                            <option selected value="">Choose an category...</option>
+                            @forelse($category as $cate)
+                                <option value="{{ $cate->id}}">
+                                    {{ $cate->name }}
+                                </option>
+                            @empty
+                                <span>No Data Found</span>
+                            @endforelse
+                        </select>
+
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary ml" type="submit">
+                                Search Products
+                            </button>
+                        </div>
                     </div>
                 </form>
             </li>
-
         </ul>
 
         <ul class="navbar-item flex-row ml-md-auto">
@@ -29,6 +47,72 @@
                 <a href="{{ route('coin_list') }}" class="nav-link text-white"> Buy Coin | </a>
             </li>
 
+            @auth
+
+                @php
+                    $me = auth()->user()->id;
+
+                    $chats = \App\Models\Chat::where('receiver_id',$me)
+                                                ->where('status',0)
+                                                ->latest()->get();
+                @endphp
+
+
+                <li class="nav-item dropdown message-dropdown">
+                <a href="javascript:void(0);" class="nav-link dropdown-toggle" id="messageDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         class="feather feather-mail">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    @if($chats->count() == 0)
+
+                    @else
+                        <sup style="color: #fd55e9; font-size: 15px">{{ $chats->count() }}</sup>
+                    @endif
+                </a>
+                <div class="dropdown-menu position-absolute" aria-labelledby="messageDropdown">
+                    <div class="">
+
+                        @forelse($chats as $chat)
+                            <a href="{{ route('user_sms_view',$chat->id) }}" class="dropdown-item">
+                                <div class="">
+                                    <div class="media">
+                                        <div class="user-img">
+                                            <div class="avatar avatar-xl">
+                                                    <span class="avatar-title rounded-circle">
+                                                        @if(!empty($chat->adminSender->name))
+                                                            {{ \Str::substr($chat->adminSender->name,0,1) }}
+                                                        @else
+                                                            {{ \Str::substr($chat->seller->name,0,1) }}
+                                                        @endif
+                                                    </span>
+                                            </div>
+                                        </div>
+                                        <div class="media-body">
+                                            <div class="">
+                                                <h5 class="usr-name">
+                                                    @if(!empty($chat->adminSender->name))
+                                                        {{ $chat->adminSender->name }}
+                                                    @else
+                                                        {{ $chat->seller->name }}
+                                                    @endif
+                                                </h5>
+                                                <p class="msg-title">{{ $chat->message }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        @empty
+                            <span class="dropdown-item">Oops. No new message!</span>
+                        @endforelse
+
+                    </div>
+                </div>
+            </li>
+            @endauth
             @auth
                 <li class="nav-item dropdown user-profile-dropdown">
                     <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="userProfileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">

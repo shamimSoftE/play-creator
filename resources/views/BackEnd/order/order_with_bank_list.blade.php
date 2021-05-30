@@ -40,10 +40,24 @@
                         @foreach($orders as $order)
                             <tr>
                                 <td>{{ $i++ }}</td>
-                                <td>{{ $order->user->name }}</td>
-                                <td>{{ $order->coin->coin_amount }}</td>
+
                                 <td>
-                                    <img src="{{ asset("Back/images/check/".$order->screenshot) }}" height="80px" alt="cate-img">
+                                    @if(!empty($order->coin->coin_amount ))
+                                    {{ $order->user->name }}</td>
+                                    @else
+                                        John
+                                    @endif
+                                <td>
+                                    @if(!empty($order->coin->coin_amount ))
+                                    {{ $order->coin->coin_amount }}
+                                    @else
+                                        0
+                                    @endif
+                                </td>
+                                <td>
+                                    <a href="{{ route('view_check',$order->id) }}" target="_blank">
+                                        <img src="{{ asset("Back/images/check/".$order->screenshot) }}" height="80px" alt="bank-check">
+                                    </a>
                                 </td>
                                 <td>
                                     {{ $order->amount }}$
@@ -56,7 +70,7 @@
                                         </a>
                                     @else
                                         <span class="btn text-success" title="Order Completed">
-                                            <i class="fas fa-arrow-up"></i> Confirmed
+                                            <i class="fas fa-arrow-up"></i> Approved
                                         </span>
                                     @endif
                                 </td>
@@ -66,10 +80,18 @@
                                         document.getElementById('order-delete-{{ $order->id }}').submit()
                                         }">
                                         <i class="fas fa-trash text-danger"></i>
-                                        <form method="post" action="{{--{{ route('order_destroy',$order) }}--}}" id="{{ 'order-delete-'.$order->id }}">
+                                        <form method="post" action="{{ route('order_destroy',$order) }}" id="{{ 'order-delete-'.$order->id }}">
                                             @csrf
                                         </form>
                                     </a>
+
+                                    @if($order->status == 0)
+
+                                    @else
+                                        <span class="btn text-success" title="Order Completed">
+                                            <i class="fas fa-check"></i>
+                                        </span>
+                                    @endif
 
                                 </td>
 

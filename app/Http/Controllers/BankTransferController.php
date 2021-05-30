@@ -12,6 +12,18 @@ use Illuminate\Support\Facades\DB;
 
 class BankTransferController extends Controller
 {
+    public function checkView($id)
+    {
+        $order = BankTransfer::find($id);
+        return view('BackEnd.view',compact('order'));
+    }
+    public function destroy($id)
+    {
+        $order = BankTransfer::find($id);
+        $order->delete();
+        return back()->with('sms', 'Order deleted');
+    }
+
 
     protected function Img($request)
     {
@@ -45,7 +57,7 @@ class BankTransferController extends Controller
 
     /*==================== for admin panel function =========================*/
 
-    public function list()
+    public function index()
     {
         $orders = BankTransfer::latest()->get();
 
@@ -60,8 +72,12 @@ class BankTransferController extends Controller
         $coin_buy->coin_id = $order->coin_id;
         $coin_buy->save();
 
+        $user = Auth::user();
+
+        $newBalance = $user->balance+$order->coin->coin_amount;
+
         DB::table('users')->where('id',$order->user_id)->update([
-            'balance' =>  $order->coin->coin_amount,
+            'balance' =>  $newBalance,
         ]);
 
         $order->status = 1;

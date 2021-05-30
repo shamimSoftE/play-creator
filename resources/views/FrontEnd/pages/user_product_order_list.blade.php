@@ -1,7 +1,7 @@
 @extends('FrontEnd.master')
 
 @section('title')
-    purchased-item
+    order-item
 @endsection
 
 @section('content')
@@ -42,7 +42,7 @@
             <div id="purchaseCoin" class="widget-content widget-content-area br-6 p-2">
                 <div class="">
                     <a class="mt-2 mr-4 text-center" href="#">
-                        Your Purchase Product
+                        Order List
                     </a>
                 </div>
 

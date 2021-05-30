@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\CoinController;
+use App\Http\Controllers\BankController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,21 +21,12 @@ use App\Http\Controllers\CoinController;
 Route::get('/', [\App\Http\Controllers\FrontEnd::class, 'home']  )->name('guest_home');
 Route::get('coin-buy', [\App\Http\Controllers\FrontEnd::class, 'coinList'])->name('coin_list');
 Route::get('/search-item', [\App\Http\Controllers\FrontEnd::class, 'search'])->name('search_item');
-Route::get('category-product-{id}', [\App\Http\Controllers\FrontEnd::class, 'catePro'])->name('cate_pro');
-
-/*================= chatting ===================================== */
-Route::get('chat', [\App\Http\Controllers\ChattingController::class, 'create'])->name('chatting_form');
-Route::get('user-list', [\App\Http\Controllers\ChattingController::class, 'index'])->name('user_list');
-Route::get('chat-with-{id}', [\App\Http\Controllers\ChattingController::class, 'chatting'])->name('chat_user');
-Route::post('message-send', [\App\Http\Controllers\ChattingController::class, 'store'])->name('chatting_store');
-Route::get('message-replay', [\App\Http\Controllers\ChattingController::class, 'replay'])->name('chatting_replay');
-
-/*================= end chatting ===================================== */
+//Route::get('category-product-{id}', [\App\Http\Controllers\FrontEnd::class, 'catePro'])->name('cate_pro');
 
 /*======================== buy coin & uc =======================================*/
 Route::get('checkout-{id}',[\App\Http\Controllers\CheckoutController::class, 'checkout'])->name('payment_page');
 Route::post('payment-success',[\App\Http\Controllers\CheckoutController::class, 'complete'])->name('payment_completed');
-            /*===================== pay with bank transfer */
+/*===================== pay with bank transfer */
 Route::post('pay-with-bank-',[\App\Http\Controllers\BankTransferController::class, 'bank'])->name('pay_with_bank');
 
 
@@ -50,12 +42,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('coin-purchased', [\App\Http\Controllers\FrontEnd::class, 'purchasedCoin'])->name('purchased_coin');
     Route::get('new-order', [\App\Http\Controllers\FrontEnd::class, 'OrderManage'])->name('user_order');
 
+    /*================= chatting ===================================== */
+    Route::get('chatting-{id}', [\App\Http\Controllers\ChattingController::class, 'chat'])->name('chat_box');
+    Route::post('message-store', [\App\Http\Controllers\ChattingController::class, 'store'])->name('store_message');
+    Route::get('user-message-view-{id}', [\App\Http\Controllers\ChattingController::class, 'viewMessage'])->name('user_sms_view');
+    /*================= end chatting ===================================== */
+
     /* ======================== seller ======================= */
     Route::get('seller-request', [\App\Http\Controllers\SellerController::class, 'create'])->name('seller_form');
     Route::post('seller-data', [\App\Http\Controllers\SellerController::class, 'store'])->name('seller_store');
     /* ========================= seller ======================== */
-
-
 
     Route::get('/user-product', [\App\Http\Controllers\UserController::class, 'index'])->name('user_post');
     Route::get('/user-product', [\App\Http\Controllers\UserController::class, 'create'])->name('user_product_create');
@@ -72,7 +68,7 @@ Route::prefix('admin')->group(function (){
     Route::get('/login', [AdminController::class, 'login'])->name('admin_login_form');
     Route::post('/login-check', [AdminController::class, 'check'])->name('login_check');
     Route::post('/log-out', [AdminController::class, 'logout'])->name('admin_logout');
-    Route::get('/register', [AdminController::class, 'register'])->name('admin_register');
+    /* Route::get('/register', [AdminController::class, 'register'])->name('admin_register');*/
     Route::post('/login-store', [AdminController::class, 'store'])->name('admin_store');
 
 
@@ -84,6 +80,11 @@ Route::group(['middleware' => 'admin'], function () {
 
     Route::prefix('admin')->group(function () {
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin_dashboard');
+        Route::get('/create', [AdminController::class, 'create'])->name('admin_create');
+        Route::get('-list', [AdminController::class, 'index'])->name('admin_index');
+        Route::get('-profile-{id}', [AdminController::class, 'profile'])->name('admin_profile');
+        Route::post('-profile-update', [AdminController::class, 'update'])->name('admin_update');
+        Route::post('-destroy-{id}', [AdminController::class, 'destroy'])->name('admin_destroy');
     });
 
     /*=============== seller ==============*/
@@ -92,6 +93,11 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('seller-active-{id}', [\App\Http\Controllers\SellerController::class, 'active'])->name('seller_active');
     Route::post('seller-list-{id}', [\App\Http\Controllers\SellerController::class, 'destroy'])->name('seller_destroy');
     /*=============== seller ==============*/
+
+    /* ========================= customer message ======================== */
+    Route::get('message-view-{id}', [\App\Http\Controllers\ChattingController::class, 'readMessage'])->name('message_read');
+    Route::post('message-reply', [\App\Http\Controllers\ChattingController::class, 'replyMessage'])->name('reply_sms');
+    /* ========================= customer message end ======================== */
 
     /*=============== category ==============*/
 
@@ -126,9 +132,19 @@ Route::group(['middleware' => 'admin'], function () {
     /*================ end sold by coin ================ */
 
     /*================ pay with bank ================ */
-    Route::get('/order-list', [\App\Http\Controllers\BankTransferController::class, 'list'])->name('order_list');
+    Route::get('/order-list', [\App\Http\Controllers\BankTransferController::class, 'index'])->name('order_list');
     Route::get('/order-confirm-{id}', [\App\Http\Controllers\BankTransferController::class, 'confirm'])->name('order_confirm');
+    Route::get('/check-view-{id}', [\App\Http\Controllers\BankTransferController::class, 'checkView'])->name('view_check');
+    Route::post('/order-destroy-{id}', [\App\Http\Controllers\BankTransferController::class, 'destroy'])->name('order_destroy');
     /*================ end pay with bank ================ */
+
+
+    /*================ bank add ================ */
+    Route::resource('bank', BankController::class);
+    Route::get('active-{id}', [ BankController::class, 'active'])->name('bank_active');
+    Route::get('inactive-{id}', [ BankController::class, 'inactive'])->name('bank_inactive');
+
+    /*================ bank end ================ */
 
 
 });

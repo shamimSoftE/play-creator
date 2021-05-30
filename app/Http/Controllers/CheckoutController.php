@@ -65,7 +65,7 @@ class CheckoutController extends Controller
         $product = Post::find($request->id);
         $coins = $product->point;
         $user = Auth::user();
-        if ($user->balance == 0 )
+        if ($user->balance < $coins )
         {
             return redirect()->route('coin_list')->with('error',' You need to buy coin first');
 //            dd('coin kin hala');
@@ -73,10 +73,11 @@ class CheckoutController extends Controller
             if (!empty($product->user->email))
             {
                 $user_email = $product->user->email;
+                $userName = $product->user->name;
 
                 $data = [
-                    'name' => $product->section->title,
-                    'qty' => $product->quantity,
+                    'name' => $userName,
+                    'point' => $product->point,
                     'category' => $product->category->name,
                     'email' => $user_email,
                     'coin' => $coins,
@@ -90,16 +91,17 @@ class CheckoutController extends Controller
             }else
             {
                 $admin_email = $product->admin->email;
+                $admin_name = $product->admin->name;
 
                 $dataTwo = [
-                    'name' => $product->section->title,
-                    'qty' => $product->quantity,
+                    'name' => $admin_name,
+                    'point' => $product->point,
                     'category' => $product->category->name,
                     'email' => $admin_email,
                     'coin' => $coins,
                 ];
 
-                Mail::send('FrontEnd.pages.new_order_mail',compact('dataTwo'), function ($message) use($dataTwo) {
+                Mail::send('FrontEnd.pages.new_order_mail_two',compact('dataTwo'), function ($message) use($dataTwo) {
                     $message->to($dataTwo['email']);
                     $message->subject('New order');
                 });

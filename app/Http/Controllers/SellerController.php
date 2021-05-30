@@ -25,7 +25,6 @@ class SellerController extends Controller
             $img_tmp = $request->file('image');
 
             if ($img_tmp->isValid()){
-//                $img_exten = $img_tmp->getClientOriginalExtension();
                 $img_name = $img_tmp->getClientOriginalName();
                 $img_path = public_path('Back/images/seller');
                 $img_tmp->move($img_path,$img_name);

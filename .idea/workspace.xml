@@ -5,15 +5,42 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3df42ac2-7f74-4d30-86b0-a2d2d27a26ab" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/BackEnd/order/order_with_bank_list.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/Back/images/logo/admin.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/Back/images/logo/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/BackEnd/admin-auth/admin_list.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/BackEnd/admin-auth/admin_profile.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/BackEnd/bank/bank_add.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/BackEnd/bank/bank_list.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/BackEnd/chat/message_view.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/BackEnd/view.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/FrontEnd/pages/new_order_mail_two.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BankTransferController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BankTransferController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ChattingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ChattingController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CheckoutController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CheckoutController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Back/assets/css/dashboard/dash_1.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/Back/assets/css/dashboard/dash_1.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Back/assets/css/widgets/modules-widgets.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/Back/assets/css/widgets/modules-widgets.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Back/plugins/table/datatable/datatables.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/Back/plugins/table/datatable/datatables.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/BackEnd/home/admin_home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/BackEnd/home/admin_home.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FrontEnd.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FrontEnd.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SellerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SellerController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Chatting.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Chatting.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Back/images/logo/Logo.png.png.png.png.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/BackEnd/admin-auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/BackEnd/admin-auth/login.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/BackEnd/admin-auth/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/BackEnd/admin-auth/register.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/BackEnd/include/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/BackEnd/include/header.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/BackEnd/include/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/BackEnd/include/sidebar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/BackEnd/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/BackEnd/master.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/BackEnd/order/order_with_bank_list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/BackEnd/order/order_with_bank_list.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/FrontEnd/chat/chat_box.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/FrontEnd/chat/chat_box.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/FrontEnd/chat/chat_list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/FrontEnd/chat/chat_list.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/FrontEnd/chat/chat_user_list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/FrontEnd/chat/chat_user_list.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/FrontEnd/home/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/FrontEnd/home/home.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/FrontEnd/include/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/FrontEnd/include/header.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/FrontEnd/include/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/FrontEnd/include/sidebar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/FrontEnd/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/FrontEnd/master.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/FrontEnd/pages/cate_wise_pro.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/FrontEnd/pages/cate_wise_pro.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/FrontEnd/pages/checkout.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/FrontEnd/pages/checkout.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/FrontEnd/pages/coin_page.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/FrontEnd/pages/coin_page.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/FrontEnd/pages/new_order_mail.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/FrontEnd/pages/new_order_mail.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/FrontEnd/pages/user_product_order_list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/FrontEnd/pages/user_product_order_list.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -156,12 +183,13 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/Back/assets/img" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/Back/images/logo" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="H:\xampp\htdocs\play-creator\public\Back\images\logo" />
       <recent name="H:\xampp\htdocs\play-creator\public\Back\assets\img" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -223,6 +251,36 @@
       <workItem from="1621615885467" duration="2630000" />
       <workItem from="1621653796041" duration="1376000" />
       <workItem from="1621672560796" duration="3321000" />
+      <workItem from="1621757651778" duration="262000" />
+      <workItem from="1621759068307" duration="406000" />
+      <workItem from="1621761375638" duration="600000" />
+      <workItem from="1621764408399" duration="16000" />
+      <workItem from="1621764530290" duration="81000" />
+      <workItem from="1621769722967" duration="10000" />
+      <workItem from="1621787276047" duration="111000" />
+      <workItem from="1621790956883" duration="591000" />
+      <workItem from="1621838252020" duration="2027000" />
+      <workItem from="1621840412346" duration="497000" />
+      <workItem from="1621851566131" duration="658000" />
+      <workItem from="1621863512209" duration="1252000" />
+      <workItem from="1621868065798" duration="40000" />
+      <workItem from="1621956740445" duration="8928000" />
+      <workItem from="1621999509063" duration="2576000" />
+      <workItem from="1622016611381" duration="8364000" />
+      <workItem from="1622074031605" duration="6849000" />
+      <workItem from="1622090541733" duration="1748000" />
+      <workItem from="1622128959220" duration="2082000" />
+      <workItem from="1622173184610" duration="6496000" />
+      <workItem from="1622192764435" duration="3984000" />
+      <workItem from="1622210727017" duration="1446000" />
+      <workItem from="1622213534206" duration="5295000" />
+      <workItem from="1622219892595" duration="1300000" />
+      <workItem from="1622254579279" duration="2847000" />
+      <workItem from="1622287630054" duration="4607000" />
+      <workItem from="1622299877218" duration="6722000" />
+      <workItem from="1622306691105" duration="151000" />
+      <workItem from="1622349187598" duration="4888000" />
+      <workItem from="1622399452335" duration="1674000" />
     </task>
     <servers />
   </component>

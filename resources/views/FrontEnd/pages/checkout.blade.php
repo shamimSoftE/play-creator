@@ -64,37 +64,81 @@
                                                 </form>
                                             </div>
                                         </div>
-
                                     </div>
-                                </div>
-                            </div>
-                            <div class="offset-1 col-lg-10 col-md-10 col-sm-12">
-                                <div class="">
-                                    <strong>Or</strong>
-                                    <p>You can pay with your bank account</p>
-                                </div>
-                                <div class="card">
-                                    <div class="card-body">
-                                        <form action="{{route('pay_with_bank')}}"  method="post" enctype="multipart/form-data">
-                                            @csrf
-                                            <div class="form-group">
 
-                                                <div class="card-header">
-                                                    <label for="card-element">Give us your bank money transfer check image</label>
+                                    <div class="row justify-content-center mt-3">
+                                        <div class="offset-1 col-lg-10 col-md-10 col-sm-12">
+                                            <div class="">
+                                                <strong>Or</strong>
+                                                <p>You can pay with your bank account</p>
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <form action="{{route('pay_with_bank')}}"  method="post" enctype="multipart/form-data">
+                                                        @csrf
+                                                        <div class="form-group">
 
-                                                    <input type="hidden"  name="amount" value="{{ $coin->coin_price }}" />
-                                                    <input type="hidden" name="coin_id" value="{{ $coin->id}}">
-                                                    <input type="file" accept="image/*"  name="screenshot" class="form-control-file" />
+                                                            <div class="card-header">
+                                                                <label for="card-element">Give us your bank money transfer check image</label>
+
+                                                                <input type="hidden"  name="amount" value="{{ $coin->coin_price }}" />
+                                                                <input type="hidden" name="coin_id" value="{{ $coin->id}}">
+                                                                <input type="file" accept="image/*"  name="screenshot" class="form-control-file" />
+                                                            </div>
+                                                        </div>
+                                                        <button class="btn btn-dark float-right" type="submit">
+                                                            Proceed
+                                                        </button>
+                                                    </form>
                                                 </div>
                                             </div>
-                                            <button class="btn btn-dark float-right" type="submit">
-                                                Proceed
-                                            </button>
-                                        </form>
+                                        </div>
+                                    </div>
+
+                                    <div class="row justify-content-center mt-5">
+                                        <div class="offset-1 col-lg-10 col-md-10 col-sm-12">
+                                            <div class="card">
+
+                                                <div class="text-center">
+                                                    <h4>Choose a bank account number</h4>
+                                                </div>
+
+                                                <div class="card-body">
+                                                    <table id="zero-config" class="table dt-table-hover" style="width:100%">
+
+                                                        <thead>
+                                                        <tr>
+                                                            <th>Sl</th>
+                                                            <th>Bank Name</th>
+                                                            <th>Account Holders Name</th>
+                                                            <th>Account Number</th>
+                                                        </tr>
+                                                        </thead>
+
+                                                        @php
+                                                            $banks = \App\Models\BankAccount::where('status',1)->latest()->get();
+                                                        @endphp
+                                                        <tbody>
+                                                        @php($i = 1)
+                                                        @foreach($banks as $bank)
+                                                            <tr>
+
+                                                                <td>{{ $i++ }}</td>
+                                                                <td>{{ $bank->bank_name }}</td>
+                                                                <td>{{ $bank->account_holder_name }}</td>
+                                                                <td>{{ $bank->account_number }}</td>
+
+                                                            </tr>
+                                                        @endforeach
+
+                                                        </tbody>
+
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-
-
                         </div>
                     </div>
                 </div>
