@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Seller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SellerController extends Controller
@@ -124,6 +125,5 @@ class SellerController extends Controller
         $seller->save();
         return back()->with('sms','Seller goes to  pending mode');
     }
-
 
 }

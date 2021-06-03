@@ -25,7 +25,7 @@
                     {{-- //display error message --}}
 
                     <div class="widget-content widget-content-area">
-                        <h3 class="text-center">Here is your product order list</h3>
+                        <h3 class="text-center">Here is your order list</h3>
                         <div class="d-flex b-skills">
                             <div class="mt-2 ml-5">
                                 <a href="{{ route('user_profile') }}" class="btn btn-sm btn-success mb-3">
@@ -51,10 +51,11 @@
                     <thead>
                     <tr>
                         <th>Sl</th>
-                        <th>Product Name</th>
+                        <th>Product Image</th>
                         <th>Product Coins</th>
                         <th>Product Qty</th>
                         <th>Product Status</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
 
@@ -63,10 +64,26 @@
                     @forelse($productOrder as $key => $pro)
                         <tr>
                             <td>{{ ++$key }}</td>
-                            <td>{{ $pro->product->title }}</td>
+
+                            <td>
+                                @isset($pro->category->image)
+                                    <img src="{{ asset("Back/images/category/".$pro->category->image) }}" height="80px" alt="cate-img">
+                                @endisset
+                            </td>
                             <td>{{ $pro->product->point }} </td>
                             <td>{{ $pro->product->quantity }} pcs</td>
                             <td>{{ $pro->status }}</td>
+                            <td>
+                                @if($pro->status == 'pending')
+                                    <a href="{{ route('order_com',$pro->id) }}" class="btn btn-sm btn-primary">
+                                        Confirm
+                                    </a>
+                                @else
+                                    <a href="#" class="btn btn-sm btn-success">
+                                        Completed
+                                    </a>
+                                @endif
+                            </td>
 
                         </tr>
                     @empty
@@ -80,10 +97,11 @@
                     <tfoot>
                     <tr>
                         <th>Sl</th>
-                        <th>Product Name</th>
+                        <th>Product Image</th>
                         <th>Product Coins</th>
                         <th>Product Qty</th>
                         <th>Product Status</th>
+                        <th></th>
                     </tr>
                     </tfoot>
                 </table>

@@ -72,7 +72,47 @@
                             </div>
                         </a>
                         @empty
-                            <span class="dropdown-item">Oops. No new message!</span>
+                            @php
+                                $me = auth()->guard('admin')->user()->id;
+                                $chatting = \App\Models\Chat::where('receiver_id',$me)
+                                                            ->where('status',1)
+                                                            ->latest()->get();
+                            @endphp
+{{--                            <span class="dropdown-item">Oops. No new message!</span>--}}
+                            <strong>Your chatting history</strong>
+                            <hr style="margin-top: -2px; height: 1px; background-color: #0e1726"/>
+                            @foreach($chatting as $sms)
+                                <a href="{{ route('user_sms_view',$sms->id) }}" class="dropdown-item">
+                                    <div class="">
+                                        <div class="media">
+                                            <div class="user-img">
+                                                <div class="avatar avatar-xl">
+                                                    <span class="avatar-title rounded-circle">
+                                                        @if(!empty($sms->adminSender->name))
+                                                            {{ \Str::substr($sms->adminSender->name,0,1) }}
+                                                        @else
+                                                            {{ \Str::substr($sms->seller->name,0,1) }}
+                                                        @endif
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="media-body">
+                                                <div class="">
+                                                    <h5 class="usr-name">
+                                                        @if(!empty($sms->adminSender->name))
+                                                            {{ $sms->adminSender->name }}
+                                                        @else
+                                                            {{ $sms->seller->name }}
+                                                        @endif
+                                                    </h5>
+
+                                                    <p class="msg-title">{{ $sms->message }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            @endforeach
                         @endforelse
 
                     </div>

@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Coin;
 use App\Models\Post;
 use App\Models\Section;
+use App\Models\Seller;
 use Illuminate\Http\Request;
 
 class FrontEnd extends Controller
@@ -51,10 +52,21 @@ class FrontEnd extends Controller
 
     public function OrderManage()
     {
-        $user = auth()->user()->id;
-        $productOrder = Order::where('user_id',$user)->latest()->get();
-        return view('FrontEnd.pages.user_product_order_list',compact('productOrder'));
+        $seller = Seller::where('user_id',auth()->user()->id)->first();
+
+        $productOrder = Order::where('seller_id',$seller->id)->latest()->get();
+
+        return view('FrontEnd.pages.seller_product_order_list',compact('productOrder'));
     }
+
+    public function OrderComplete($id)
+    {
+        $order = Order::find($id);
+        $order->status = 'completed';
+        $order->save();
+        return back()->with('sms', 'Order Completed');
+    }
+
 
     public function purchasedCoin()
     {

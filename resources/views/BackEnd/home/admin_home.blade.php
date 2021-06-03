@@ -65,14 +65,14 @@
             <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 layout-spacing">
                 <div class="widget widget-table-two">
                     @php
-                        $cates = \App\Models\Category::where('status',1)->get();
+                        $cates = \App\Models\Withdraw::where('status',0)->get();
                     @endphp
                     <div class="widget-heading ">
                         <h5 class="text-success">
-                            Total Category
+                            Pending Withdraw
                             <sup style="font-size: 20px;color: #02009a">{{ $cates->count()  }}</sup>
                         </h5>
-                        <a href="{{ route('category.index') }}" class="btn btn-sm btn-dark mt-2" title="Show List">View</a>
+                        <a href="{{ route('withdraw_pending') }}" class="btn btn-sm btn-dark mt-2" title="Show List">View</a>
                     </div>
                 </div>
             </div>

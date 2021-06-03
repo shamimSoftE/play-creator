@@ -47,6 +47,7 @@
                                         @endphp
 
                                         @forelse($products as $pro)
+
                                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-5">
                                                 <div class="card component-card_9">
                                                     @if(!empty($pro->category->image))
@@ -120,8 +121,15 @@
                                                             @csrf
                                                             <div class="modal-body text-center">
                                                                 <div class="icon-content">
-                                                                    <img src="{{ asset("Back/images/category/". $pro->category->image) }}" width="120" alt="pro_img">
+                                                                    @if(!empty($pro->category->image))
+                                                                        <img src="{{ asset("Back/images/category/". $pro->category->image) }}"
+                                                                             width="120" alt="pro_img">
+                                                                    @else
+                                                                        <img src="" width="120" alt="pro_img">
+                                                                    @endif
+
                                                                     <input type="hidden" name="id" value="{{ $pro->id }}" />
+                                                                    <input type="hidden" name="seller_id" value="{{ $pro->seller_id }}" />
                                                                 </div>
                                                                 <div class="modal-text">
                                                                     {{ $pro->title }} <br/>

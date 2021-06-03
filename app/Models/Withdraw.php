@@ -5,15 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Order extends Model
+class Withdraw extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $guarded = [''];
 
-    public function product()
+    public function user()
     {
-        return $this->belongsTo(Post::class, 'post_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
-
 }

@@ -30,4 +30,11 @@ class Post extends Model
     {
         return $this->belongsTo(Section::class);
     }
+
+    public function seller()
+    {
+        return $this->belongsTo(Seller::class, 'seller_id');
+    }
+
+
 }

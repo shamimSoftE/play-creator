@@ -41,6 +41,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('product-purchased', [\App\Http\Controllers\FrontEnd::class, 'purchasedProduct'])->name('purchased_product');
     Route::get('coin-purchased', [\App\Http\Controllers\FrontEnd::class, 'purchasedCoin'])->name('purchased_coin');
     Route::get('new-order', [\App\Http\Controllers\FrontEnd::class, 'OrderManage'])->name('user_order');
+    Route::get('confirm-order-{id}', [\App\Http\Controllers\FrontEnd::class, 'OrderComplete'])->name('order_com');
+
+    /*================= withdraw ===================================== */
+    Route::get('withdraw-your-coin54214/{id}', [\App\Http\Controllers\WithdrawController::class, 'withdraw'])->name('withdraw_point');
+    Route::get('withdraw-list', [\App\Http\Controllers\WithdrawController::class, 'index'])->name('withdraw_index');
+    Route::post('withdraw-confirm', [\App\Http\Controllers\WithdrawController::class, 'confirm'])->name('withdraw_confirm');
+    /*================= withdraw ===================================== */
 
     /*================= chatting ===================================== */
     Route::get('chatting-{id}', [\App\Http\Controllers\ChattingController::class, 'chat'])->name('chat_box');
@@ -87,11 +94,18 @@ Route::group(['middleware' => 'admin'], function () {
         Route::post('-destroy-{id}', [AdminController::class, 'destroy'])->name('admin_destroy');
     });
 
+    /*=============== withdraw pending list ==============*/
+    Route::get('withdraw-pending', [\App\Http\Controllers\WithdrawController::class, 'pending'])->name('withdraw_pending');
+    Route::get('withdraw-complete-{id}', [\App\Http\Controllers\WithdrawController::class, 'complete'])->name('completed');
+    /*=============== end withdraw pending list ==============*/
+
     /*=============== seller ==============*/
-    Route::get('seller-list', [\App\Http\Controllers\SellerController::class, 'index'])->name('seller_list');
-    Route::get('seller-inactive-{id}', [\App\Http\Controllers\SellerController::class, 'Inactive'])->name('seller_hide');
-    Route::get('seller-active-{id}', [\App\Http\Controllers\SellerController::class, 'active'])->name('seller_active');
-    Route::post('seller-list-{id}', [\App\Http\Controllers\SellerController::class, 'destroy'])->name('seller_destroy');
+    Route::prefix('seller')->group(function (){
+        Route::get('list', [\App\Http\Controllers\SellerController::class, 'index'])->name('seller_list');
+        Route::get('inactive-{id}', [\App\Http\Controllers\SellerController::class, 'Inactive'])->name('seller_hide');
+        Route::get('active-{id}', [\App\Http\Controllers\SellerController::class, 'active'])->name('seller_active');
+        Route::post('delete-{id}', [\App\Http\Controllers\SellerController::class, 'destroy'])->name('seller_destroy');
+    });
     /*=============== seller ==============*/
 
     /* ========================= customer message ======================== */

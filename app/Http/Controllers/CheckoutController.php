@@ -62,8 +62,20 @@ class CheckoutController extends Controller
 
     public function buyConfirm (Request $request)
     {
+
         $product = Post::find($request->id);
+
         $coins = $product->point;
+
+        /*============== Add point to seller id ==========*/
+
+        $seller_new_point = $product->user->balance + $coins;
+
+        DB::table('users')->where('id',$product->user_id)->update([
+            'balance' =>  $seller_new_point,
+        ]);
+        /*==============  Check customer(user) point  ==========*/
+
         $user = Auth::user();
         if ($user->balance < $coins )
         {
@@ -72,14 +84,14 @@ class CheckoutController extends Controller
         }else{
             if (!empty($product->user->email))
             {
-                $user_email = $product->user->email;
+                $userEmail = $product->user->email;
                 $userName = $product->user->name;
 
                 $data = [
                     'name' => $userName,
                     'point' => $product->point,
                     'category' => $product->category->name,
-                    'email' => $user_email,
+                    'email' => $userEmail,
                     'coin' => $coins,
                 ];
 
@@ -110,9 +122,9 @@ class CheckoutController extends Controller
             $order = new Order();
             $order->user_id = auth()->user()->id;
             $order->post_id = $request->id;
+            $order->seller_id = $request->seller_id;
             $order->game_id = $request->game_id;
             $order->save();
-
 
             $newBalance = $user->balance-$coins;
 

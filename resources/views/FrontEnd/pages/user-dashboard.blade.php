@@ -44,7 +44,7 @@
                                                     Create Product
                                                 </a>
                                             @else
-                                                <a href="{{ route('user_product_create') }}" aria-disabled="true" class="btn btn-sm btn-success" disabled title="Please apply first, to want be a seller.">
+                                                <a href="{{--{{ route('user_product_create') }}--}}" aria-disabled="true" class="btn btn-sm btn-success" disabled title="Please apply first, to want be a seller.">
                                                     Create Product
                                                 </a>
                                             @endif
@@ -62,8 +62,11 @@
                                     <div class="mt-2 ml-5">
                                         <a href="{{ route('user_order') }}" class="btn btn-sm btn-info">
                                             @php
-                                              $user = auth()->user()->id;
-                                                $order = \App\Models\Order::where('user_id',$user)->latest()->get();
+                                                $seller = \App\Models\Seller::where('user_id',auth()->user()->id)->first();
+
+                                                  $order = \App\Models\Order::where('seller_id',$seller->id)
+                                                                               ->where('status', 'pending')
+                                                                               ->latest()->get();
                                             @endphp
                                             <sup style="font-size: 15px;color: #980054">{{ $order->count() }}</sup>New Order
                                         </a>

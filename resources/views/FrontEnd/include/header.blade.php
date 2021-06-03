@@ -8,7 +8,7 @@
                 </a>
             </li>
             <li class="nav-item theme-text">
-                <a href="{{ url('/') }}" class="nav-link"> Logo </a>
+               {{-- <a href="{{ url('/') }}" class="nav-link">Home</a>--}}
             </li>
         </ul>
 
@@ -51,12 +51,10 @@
 
                 @php
                     $me = auth()->user()->id;
-
                     $chats = \App\Models\Chat::where('receiver_id',$me)
                                                 ->where('status',0)
                                                 ->latest()->get();
                 @endphp
-
 
                 <li class="nav-item dropdown message-dropdown">
                 <a href="javascript:void(0);" class="nav-link dropdown-toggle" id="messageDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -106,7 +104,48 @@
                                 </div>
                             </a>
                         @empty
-                            <span class="dropdown-item">Oops. No new message!</span>
+
+                            @php
+                                $me = auth()->user()->id;
+                                $chatting = \App\Models\Chat::where('receiver_id',$me)
+                                                            ->where('status',1)
+                                                            ->latest()->get();
+                            @endphp
+{{--                            <span class="dropdown-item">Oops. No new message!</span>--}}
+                            <strong>Your chatting history</strong>
+                            <hr style="margin-top: -2px; height: 1px; background-color: #0e1726"/>
+                            @foreach($chatting as $sms)
+                                <a href="{{ route('user_sms_view',$sms->id) }}" class="dropdown-item">
+                                    <div class="">
+                                        <div class="media">
+                                            <div class="user-img">
+                                                <div class="avatar avatar-xl">
+                                                    <span class="avatar-title rounded-circle">
+                                                        @if(!empty($sms->adminSender->name))
+                                                                {{ \Str::substr($sms->adminSender->name,0,1) }}
+                                                        @else
+                                                            {{ \Str::substr($sms->seller->name,0,1) }}
+                                                        @endif
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="media-body">
+                                                <div class="">
+                                                    <h5 class="usr-name">
+                                                        @if(!empty($sms->adminSender->name))
+                                                            {{ $sms->adminSender->name }}
+                                                        @else
+                                                            {{ $sms->seller->name }}
+                                                        @endif
+                                                    </h5>
+
+                                                    <p class="msg-title">{{ $sms->message }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            @endforeach
                         @endforelse
 
                     </div>
@@ -117,7 +156,6 @@
                 <li class="nav-item dropdown user-profile-dropdown">
                     <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="userProfileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                         @php
-                            //$user = auth()->user()->id;
                         $user = Auth::user();
                         $userBalance = DB::table('users')->where('id', $user->id)->value('balance');
                         @endphp
@@ -152,7 +190,12 @@
                             @if(isset($seller->status))
 
                                 @if($seller->status == 1 )
-
+                                    <div class="dropdown-item">
+                                        <a class="" href="{{ route('withdraw_point',$user) }}" title="Withdraw your point to dollar">
+                                            <i class="fab fa-rev fa-2x mr-2"></i>
+                                            Withdraw
+                                        </a>
+                                    </div>
                                 @else
                                     <div class="dropdown-item">
                                         <a class="" href="{{ route('seller_form') }}" title="Request to be a seller">

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Section;
+use App\Models\Seller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -33,6 +35,9 @@ class UserController extends Controller
             'quantity' => 'required',
             'category_id' => 'required',
         ]);
+        $user_id = auth()->user()->id;
+
+        $seller = Seller::where('user_id', $user_id)->first();
 
         Post::create([
             'title' => $request->title,
@@ -40,7 +45,8 @@ class UserController extends Controller
             'quantity' => $request->quantity,
             'section_id' => $request->section_id,
             'category_id' => $request->category_id,
-            'user_id' => auth()->user()->id,
+            'seller_id' => $seller->id,
+            'user_id' => $user_id,
         ]);
 
         return back()->with('sms', 'Post Created');

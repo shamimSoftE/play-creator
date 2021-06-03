@@ -21,6 +21,7 @@ class CreatePostsTable extends Migration
             $table->bigInteger('section_id')->nullable();
             $table->bigInteger('category_id');
             $table->bigInteger('user_id')->nullable();
+            $table->bigInteger('seller_id')->nullable();
             $table->bigInteger('admin_id')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
